@@ -3,20 +3,63 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cover Snap</title>
+<title>Vice Cover Lab — GTA-style cover art maker</title>
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+<header class="top">
+  <h1>VICE COVER LAB</h1>
+  <p>Turn any photo and a caption into GTA-style cover art. Your photos never leave this machine.</p>
+</header>
 <main class="app">
-  <section class="controls">
-    <h1>Cover Snap</h1>
-    <p>A photo and a caption, made into a square cover.</p>
-    <label>Photo <input id="photo" type="file" accept="image/*"></label>
-    <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
-    <button id="export" type="button">Export PNG 1080 x 1080</button>
-    <p id="status" role="status"></p>
+  <section class="stage">
+    <canvas id="cover" width="720" height="720" aria-label="Cover preview"></canvas>
+    <p class="hint">Click a panel to select it · drag to move the photo · scroll to zoom</p>
   </section>
-  <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
+  <aside class="controls">
+    <section>
+      <h2>Photos</h2>
+      <label class="upload">Add your photos <input id="photo" type="file" accept="image/*" multiple></label>
+      <div id="samples" class="chips"></div>
+      <p class="note">Samples are free to use. Uploads stay on this machine.</p>
+    </section>
+    <section>
+      <h2>Layout</h2>
+      <div id="layout" class="opts"></div>
+    </section>
+    <section>
+      <h2>Grade</h2>
+      <div id="grade" class="opts"></div>
+    </section>
+    <section>
+      <h2>Words</h2>
+      <label>Title <input id="title" type="text" maxlength="40" value="Neon Shore"></label>
+      <label>Subtitle <input id="subtitle" type="text" maxlength="60" value="midnight on the boulevard"></label>
+      <label>Badge <input id="badge" type="text" maxlength="24" value="Sunset Edition"></label>
+    </section>
+    <section>
+      <h2 id="panelLabel">Panel 1 of 4</h2>
+      <label>Photo <select id="panelPhoto"></select></label>
+      <label>Zoom <input id="zoom" type="range" min="100" max="300" value="100"></label>
+      <button id="fillAll" type="button">Fill every panel with this photo</button>
+    </section>
+    <section>
+      <h2>Finish</h2>
+      <label class="check"><input id="grain" type="checkbox" checked> Film grain</label>
+      <label class="check"><input id="vignette" type="checkbox" checked> Vignette</label>
+      <div class="sizes">
+        <label class="check"><input name="size" type="checkbox" value="square" checked> 1080 × 1080</label>
+        <label class="check"><input name="size" type="checkbox" value="story" checked> 1080 × 1350</label>
+        <label class="check"><input name="size" type="checkbox" value="wide" checked> 1920 × 1080</label>
+      </div>
+      <div class="row">
+        <button id="undo" type="button">Undo</button>
+        <button id="redo" type="button">Redo</button>
+      </div>
+      <button id="export" type="button" class="primary">Export PNGs</button>
+      <p id="status" role="status"></p>
+    </section>
+  </aside>
 </main>
 <script type="module" src="./src/main.js"></script>
 </body>

@@ -1,12 +1,41 @@
-html, body { margin: 0; height: 100%; background: #f2f0f4; color: #1d1b22; font: 15px/1.4 system-ui, sans-serif; }
-.app { display: flex; gap: 32px; align-items: center; justify-content: center; height: 100%; padding: 24px; box-sizing: border-box; }
-.controls { display: flex; flex-direction: column; gap: 14px; width: 280px; }
-.controls h1 { margin: 0; font-size: 28px; }
-.controls p { margin: 0; color: #5c5866; }
-label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; }
-input[type=text] { font: inherit; padding: 8px; border: 1px solid #c9c4d1; border-radius: 6px; }
-button { font: inherit; font-weight: 700; padding: 10px; border: 0; border-radius: 6px; background: #1d1b22; color: #fff; cursor: pointer; }
-canvas { width: min(70vh, 60vw); height: min(70vh, 60vw); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); }
-body.shot-cover .controls { display: none; }
+/* VICE COVER LAB editor: a dark neon workbench around the live preview. */
+@font-face { font-family: 'Anton'; src: url('./fonts/anton/Anton-Regular.ttf') format('truetype'); font-display: swap; }
+@font-face { font-family: 'Pacifico'; src: url('./fonts/pacifico/Pacifico-Regular.ttf') format('truetype'); font-display: swap; }
+@font-face { font-family: 'Bebas Neue'; src: url('./fonts/bebasneue/BebasNeue-Regular.ttf') format('truetype'); font-display: swap; }
+
+html, body { margin: 0; min-height: 100%; background: #14101d; color: #f2eef8; font: 15px/1.45 system-ui, sans-serif; }
+.top { padding: 18px 28px 4px; }
+.top h1 { margin: 0; font-family: Anton, sans-serif; font-size: 34px; letter-spacing: 2px; color: #fff; text-shadow: 3px 3px 0 #ff2e88, 6px 6px 0 rgba(0, 0, 0, 0.4); }
+.top p { margin: 6px 0 0; color: #b9b0cc; }
+.app { display: flex; gap: 28px; align-items: flex-start; padding: 20px 28px 28px; box-sizing: border-box; }
+.stage { flex: 1; min-width: 0; position: sticky; top: 16px; }
+.stage canvas { display: block; width: 100%; max-width: 760px; height: auto; margin: 0 auto; background: #0d0618; box-shadow: 0 12px 44px rgba(0, 0, 0, 0.55); }
+.hint { text-align: center; color: #8f86a3; font-size: 13px; }
+.controls { width: 340px; flex: none; display: flex; flex-direction: column; gap: 18px; }
+.controls section { background: #1e1830; border: 1px solid #342a4e; border-radius: 12px; padding: 14px 16px; }
+.controls h2 { margin: 0 0 10px; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; color: #ff8fb8; }
+.controls label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; margin-bottom: 10px; }
+.controls label:last-child { margin-bottom: 0; }
+input[type=text], select { font: inherit; padding: 8px 10px; border: 1px solid #4a3f66; border-radius: 6px; background: #14101d; color: #f2eef8; }
+input[type=range] { accent-color: #ff2e88; }
+button { font: inherit; font-weight: 700; padding: 9px 12px; border: 1px solid #4a3f66; border-radius: 6px; background: #2a2140; color: #f2eef8; cursor: pointer; }
+button:hover:not(:disabled) { border-color: #ff2e88; }
+button:disabled { opacity: 0.4; cursor: default; }
+button.primary { width: 100%; background: #ff2e88; border-color: #ff2e88; color: #fff; font-size: 16px; padding: 12px; }
+button.primary:hover { background: #ff4d9c; }
+.upload { cursor: pointer; }
+.upload input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { padding: 6px 10px; font-size: 13px; }
+.opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.opt.on { background: #ff2e88; border-color: #ff2e88; color: #fff; }
+.check { flex-direction: row !important; align-items: center; gap: 8px !important; font-weight: 400 !important; }
+.sizes { display: flex; flex-direction: column; gap: 2px; margin: 6px 0 10px; }
+.row { display: flex; gap: 8px; margin-bottom: 10px; }
+.row button { flex: 1; }
+.note { margin: 8px 0 0; color: #8f86a3; font-size: 13px; }
+#status { margin: 10px 0 0; color: #9be8c0; min-height: 1.2em; }
+body.shot-cover .top, body.shot-cover .controls, body.shot-cover .hint { display: none; }
 body.shot-cover .app { padding: 0; }
-body.shot-cover canvas { width: 100vw; height: 100vh; box-shadow: none; }
+body.shot-cover .stage { position: static; }
+body.shot-cover canvas { width: 100vw; height: 100vh; max-width: none; box-shadow: none; }
